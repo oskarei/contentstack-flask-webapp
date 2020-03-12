@@ -1,0 +1,10 @@
+{%- extends "base.html" %}
+
+{% block content %}
+  <hr>
+  <h2>{{entry.title}}</h2>
+    <em>{{entry.publish_date[:-14]}}</em>
+      <p>
+        {{entry.main_text|safe}}
+      </p>
+{%- endblock %}

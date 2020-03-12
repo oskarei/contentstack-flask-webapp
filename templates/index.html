@@ -1,0 +1,38 @@
+{%- extends "base.html" %}
+
+{% block content %}
+  <hr>
+  <h1>{{entry.title}}</h1>
+  <h5>{{entry.intro}}</h5>
+    {% for mainText in entry.main_text %}
+      <div class="card" style="margin-top:10px;">
+        <div class="card-body">
+          {{mainText|safe}}
+        </div>
+      </div>
+    {% endfor %}
+
+  {% for key, value in ref.items() %}
+    <h5 style="margin-top:10px;">{{key}}</h5>
+
+    <div id="accordion">
+      {% for entry in value %}
+        <div class="card">
+          <div class="card-header" id="heading{{entry.uid}}">
+            <h5 class="mb-0">
+              <button class="btn btn-link btn-sm" data-toggle="collapse" data-target="#collapse{{entry.uid}}" aria-expanded="true" aria-controls="collapse{{entry.uid}}">
+                {{entry.title}}
+              </button>
+            </h5>
+          </div>
+          <div id="collapse{{entry.uid}}" class="collapse hide" aria-labelledby="heading{{entry.uid}}" data-parent="#accordion">
+            <div class="card-body">
+              {{entry.main_text|safe}}
+              <a class="btn btn-primary" href="{{entry.link.href}}" target="_new" role="button">{{entry.link.title}}</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endfor %}
+{%- endblock %}

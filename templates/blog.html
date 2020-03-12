@@ -1,0 +1,18 @@
+{%- extends "base.html" %}
+
+{% block content %}
+  {%for i in range(0, len)%}
+  <hr>
+  <h2>{{blogs[i].title}}</h2>
+    <em>{{blogs[i].publish_date[:-14]}}</em>
+
+      <p>
+        {{blogs[i].main_text|safe}}
+      </p>
+      <p>
+        {% set path = blogs[i].url.split('/') %}
+        <a href="{{ url_for('blogEntry', blogPath=path[0], year=path[1], month=path[2], day=path[3], slug=path[4]) }}">Read more...</a>
+      </p>
+  {%endfor%}
+
+{%- endblock %}
